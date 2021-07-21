@@ -19,7 +19,7 @@ class DumpDatabase:
     def dump(self, save_to_space=True):
         print("\U0001F4E6 Preparing database backup started")
         process_status = os.WEXITSTATUS(os.system(
-            f"pg_dump -h {self.host} -p {self.port} -U {self.user} -w {self.password} -d {self.db_name} "
+            f"pg_dump --dbname=postgresql://{self.user}:{self.password}@{self.host}:{self.port}/{self.db_name} "
             f"--format=t --file='{self.file_name}'"
         ))
         if process_status != 0:
